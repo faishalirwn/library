@@ -64,7 +64,7 @@ function render() {
 
         let cellRemove = document.createElement("td");
         let removeBtn = document.createElement("button");
-        removeBtn.textContent = "🗑️";
+        removeBtn.textContent = "❌";
         removeBtn.setAttribute("class", "delete-btn");
         removeBtn.onclick = (e) => {
             const parentRow = e.target.parentNode.parentNode;
