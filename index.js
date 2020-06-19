@@ -1,5 +1,3 @@
-let myLibrary = [];
-
 function Book(title, author, pages, read) {
     this.title = title,
     this.author = author,
@@ -7,18 +5,27 @@ function Book(title, author, pages, read) {
     this.read = read
 }
 
-const sample0 = new Book("The Autobiography of Malcolm X", "Malcolm X with Alex Haley", 528, false);
-const sample1 = new Book("Atomic Habits", "James Clear", 320, true);
+let myLibrary;
 
-myLibrary = [...myLibrary, sample0, sample1];
+if (!localStorage.getItem("books")) {
+    const sample0 = new Book("The Autobiography of Malcolm X", "Malcolm X with Alex Haley", 528, false);
+    const sample1 = new Book("Atomic Habits", "James Clear", 320, true);
+    
+    localStorage.setItem("books", JSON.stringify([sample0, sample1]));
+    myLibrary = JSON.parse(localStorage.getItem("books"));
+} else {
+    myLibrary = JSON.parse(localStorage.getItem("books"));
+}
 
 function addBookToLibrary(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
     myLibrary = [...myLibrary, newBook];
+    localStorage.setItem("books", JSON.stringify(myLibrary));
     render();
 }
 
 function render() {
+    console.log("rendering...");
     const body = document.querySelector("tbody");
     while (body.firstChild) {
         body.removeChild(body.lastChild);
@@ -62,6 +69,7 @@ function render() {
         removeBtn.onclick = (e) => {
             const parentRow = e.target.parentNode.parentNode;
             const i = parentRow.dataset.index;
+            console.log(i);
             removeBook(i);
         }
         cellRemove.appendChild(removeBtn)
@@ -73,11 +81,12 @@ function render() {
 
 function removeBook(index) {
     myLibrary.splice(index, 1);
+    localStorage.setItem("books", JSON.stringify(myLibrary));    
     render();
 }
 
 function changeBookStatus(index) {
-    myLibrary[index].read = !(myLibrary[index].read);
+    localStorage.setItem("books", JSON.stringify(myLibrary[index].read = !(myLibrary[index].read)));    
     render();
 }
 
