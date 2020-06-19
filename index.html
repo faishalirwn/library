@@ -7,6 +7,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <main>
+        <h1>Library</h1>
+        <form>
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title" required>
+            <label for="author">Author:</label>
+            <input type="text" name="author" id="author" required>
+            <label for="pages">Pages:</label>
+            <input type="number" name="pages" id="pages" required>
+            <input type="checkbox" name="read-form" id="read-form">
+            <label for="read-form">I have read the book</label>
+            <button id="new-book-btn" type="submit">Add book</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Pages</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </main>
     <script src="index.js"></script>
 </body>
 </html>
