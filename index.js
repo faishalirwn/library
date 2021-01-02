@@ -86,7 +86,8 @@ function removeBook(index) {
 }
 
 function changeBookStatus(index) {
-    localStorage.setItem("books", JSON.stringify(myLibrary[index].read = !(myLibrary[index].read)));    
+    myLibrary[index].read = !(myLibrary[index].read)
+    localStorage.setItem("books", JSON.stringify(myLibrary));
     render();
 }
 
