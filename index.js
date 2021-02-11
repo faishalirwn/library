@@ -5,16 +5,24 @@ function Book(title, author, pages, read) {
     this.read = read
 }
 
-let myLibrary;
+Book.prototype.toggleRead = function() {
+    this.read = !(this.read);
+}
+
+let myLibrary = [];
 
 if (!localStorage.getItem("books")) {
     const sample0 = new Book("The Autobiography of Malcolm X", "Malcolm X with Alex Haley", 528, false);
     const sample1 = new Book("Atomic Habits", "James Clear", 320, true);
     
     localStorage.setItem("books", JSON.stringify([sample0, sample1]));
-    myLibrary = JSON.parse(localStorage.getItem("books"));
+    myLibrary = [sample0, sample1]
 } else {
-    myLibrary = JSON.parse(localStorage.getItem("books"));
+    myLibraryLocalStorage = JSON.parse(localStorage.getItem("books"));
+    myLibraryLocalStorage.forEach((book, i) => {
+        const newBook = new Book(book.title, book.author, book.pages, book.read);
+        myLibrary = [...myLibrary, newBook];
+    })
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -86,7 +94,7 @@ function removeBook(index) {
 }
 
 function changeBookStatus(index) {
-    myLibrary[index].read = !(myLibrary[index].read)
+    myLibrary[index].toggleRead();
     localStorage.setItem("books", JSON.stringify(myLibrary));
     render();
 }
