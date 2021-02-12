@@ -1,12 +1,14 @@
-function Book(title, author, pages, read) {
-    this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.read = read
-}
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 
-Book.prototype.toggleRead = function() {
-    this.read = !(this.read);
+    toggleRead() {
+        this.read = !(this.read);    
+    }
 }
 
 let myLibrary = [];
@@ -33,7 +35,6 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 function render() {
-    console.log("rendering...");
     const body = document.querySelector("tbody");
     while (body.firstChild) {
         body.removeChild(body.lastChild);
